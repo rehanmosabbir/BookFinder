@@ -11,6 +11,7 @@ export default function BookFinderMain() {
       price: 62,
       star: 4,
       isFavorite: false,
+      publicationYear: 2012,
     },
     {
       id: 2,
@@ -19,6 +20,7 @@ export default function BookFinderMain() {
       price: 14.99,
       star: 3.8,
       isFavorite: false,
+      publicationYear: 2016,
     },
     {
       id: 3,
@@ -27,6 +29,7 @@ export default function BookFinderMain() {
       price: 20.44,
       star: 4.7,
       isFavorite: false,
+      publicationYear: 1998,
     },
     {
       id: 4,
@@ -35,6 +38,7 @@ export default function BookFinderMain() {
       price: 4.99,
       star: 4.4,
       isFavorite: false,
+      publicationYear: 2010,
     },
     {
       id: 5,
@@ -43,6 +47,7 @@ export default function BookFinderMain() {
       price: 16.99,
       star: 4.5,
       isFavorite: false,
+      publicationYear: 2020,
     },
     {
       id: 6,
@@ -51,6 +56,7 @@ export default function BookFinderMain() {
       price: 9.99,
       star: 4.2,
       isFavorite: false,
+      publicationYear: 2001,
     },
     {
       id: 7,
@@ -59,6 +65,7 @@ export default function BookFinderMain() {
       price: 25.99,
       star: 4.6,
       isFavorite: false,
+      publicationYear: 1999,
     },
     {
       id: 8,
@@ -67,6 +74,7 @@ export default function BookFinderMain() {
       price: 29.99,
       star: 4.3,
       isFavorite: false,
+      publicationYear: 2024,
     },
   ];
   const [books, setBooks] = useState(bookList);
@@ -78,9 +86,67 @@ export default function BookFinderMain() {
     );
     setBooks([...filteredBooks]);
   }
+
+  function handleSort(sortOption) {
+    if (sortOption === "name_asc") {
+      let newBooks = [...books];
+      newBooks.sort((a, b) => {
+        let nameA = a.name.toLowerCase();
+        let nameB = b.name.toLowerCase();
+
+        if (nameA < nameB) {
+          return -1;
+        } else if (nameA > nameB) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+      setBooks(newBooks);
+    } else if (sortOption === "name_desc") {
+      let newBooks = [...books];
+      newBooks.sort((a, b) => {
+        let nameA = a.name.toLowerCase();
+        let nameB = b.name.toLowerCase();
+
+        if (nameA > nameB) {
+          return -1;
+        } else if (nameA < nameB) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+      setBooks(newBooks);
+    } else if (sortOption === "year_asc") {
+      let newBooks = [...books];
+      newBooks.sort((a, b) => {
+        if (a.publicationYear > b.publicationYear) {
+          return -1;
+        } else if (a.publicationYear < b.publicationYear) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+      setBooks(newBooks);
+    } else if (sortOption === "year_desc") {
+      let newBooks = [...books];
+      newBooks.sort((a, b) => {
+        if (a.publicationYear < b.publicationYear) {
+          return -1;
+        } else if (a.publicationYear > b.publicationYear) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+      setBooks(newBooks);
+    }
+  }
   return (
     <main className="my-10 lg:my-14">
-      <BookFinderHeader onSearchText={handleSearchText} />
+      <BookFinderHeader onSort={handleSort} onSearchText={handleSearchText} />
       <BookGrid books={books} />
     </main>
   );
