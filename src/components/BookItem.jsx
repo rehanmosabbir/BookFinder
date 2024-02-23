@@ -75,7 +75,7 @@ export default function BookItem({ book }) {
                   strokeLinejoin="round"
                 />
               </svg>
-              Favourite
+              Favorite
             </button>
           ) : (
             <button
