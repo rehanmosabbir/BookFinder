@@ -1,5 +1,7 @@
+import Navbar from "./components/Navbar";
+
 function App() {
-  return <p className=" text-3xl text-indigo-600">Hello World</p>;
+  return <Navbar />;
 }
 
 export default App;
